@@ -64,8 +64,7 @@ const getContent = (request, response) => {
       setResponse(404, 'notFound', 'page not found', request, response);
       break;
     case '/':
-      const index = fs.readFileSync(`${__dirname}/../client/client.html`);
-      response.write(index);
+      response.write(fs.readFileSync(`${__dirname}/../client/client.html`));
       response.end();
       break;
     default:

@@ -6,7 +6,7 @@ const xml = require('xml');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const checkParams = (request, param, val) => {
-	const query = url.parse(request.url,true).query;
+	const { query } = url.parse(request.url, true).query;
 	if(param in query && query[param] === val){
 		return true;
 	} 
@@ -22,9 +22,9 @@ const setResponse = (status, id, message, request, response) => {
 
 	response.writeHead(status, {'Content-Type': resType});
 
-	if(resType == 'application/json'){
+	if(resType === 'application/json'){
 		response.write(JSON.stringify(resMessage));
-	} else if (resType == 'text/xml'){
+	} else if (resType === 'text/xml'){
 		response.write(xml({response: [{id: resMessage.id}, {message: resMessage.message}]}));
 	}
 
@@ -33,7 +33,6 @@ const setResponse = (status, id, message, request, response) => {
 
 const getContent = (request, response) => {
   const reqUrl = url.parse(request.url).pathname;
-  console.log('request ', request.url);
   switch (reqUrl) {
 	case '/success':
 		setResponse(200, 'success', 'successful response', request, response);

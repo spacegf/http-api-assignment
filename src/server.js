@@ -6,7 +6,7 @@ const xml = require('xml');
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const checkParams = (request, param, val) => {
-  const { query } = url.parse(request.url, true).query;
+  const { query } = url.parse(request.url, true);
   if (param in query && query[param] === val) {
     return true;
   }

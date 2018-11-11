@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Our simple HTTP server</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+	<script type="text/babel">
+		$('#api-form').submit((event) => {
+			event.preventDefault();
+			const page = $('#page').val();
+			$.ajax({
+				method: 'POST',
+				url:`http://localhost:3000/${page}`,
+				headers: { 
+					'Content-Type': $('#type').val(),
+					'Accept': $('#type').val()
+				},
+				success: (res) => { 
+					console.log(res);
+					if($('#type').val() == 'text/xml'){
+						$('#output-status').html($(res).find('id'));
+						$('#output-message').html($(res).find('message'));
+					} else {
+						$('#output-status').html(res.id);
+						$('#output-message').html(res.message);
+					}
+					
+				},
+				error: (res) => {
+					console.log(res);
+					if($('#type').val() == 'text/xml'){
+						const xmlDoc = $.parseXML(res.responseText);
+						$('#output-status').html($(xmlDoc).find('id'));
+						$('#output-message').html($(xmlDoc).find('message'));
+					} else {
+						$('#output-status').html(res.responseJSON.id);
+						$('#output-message').html(res.responseJSON.message);
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<section id="top">
+		<h3>Status Code Tests</h3>
+		<form id="api-form">
+			<select id="page">
+				<option value="success">Success</option>
+				<option value="badRequest?valid=true">Bad Request</option>
+				<option value="unauthorized">Unauthorized</option>
+				<option value="forbidden">Forbidden</option>
+				<option value="internal">Internal</option>
+				<option value="notImplemented">Not Implemented</option>
+				<option value="notFound">Not Found</option>
+			</select>
+			<select id="type">
+				<option value="application/json">JSON</option>
+				<option value="text/xml">XML</option>
+			</select>
+			<button id="send">Send</button>
+		</form>
+	</section>
+	<section id="content">
+		<div id="output-status">
+
+		</div>
+		<div id="output-message">
+
+		</div>
+	</section>
+</body>
+</html>

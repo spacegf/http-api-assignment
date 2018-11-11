@@ -17,7 +17,6 @@
 					'Accept': $('#type').val()
 				},
 				success: (res) => { 
-					console.log(res);
 					if($('#type').val() == 'text/xml'){
 						$('#output-status').html($(res).find('id'));
 						$('#output-message').html($(res).find('message'));
@@ -27,7 +26,6 @@
 					}
 				},
 				error: (res) => {
-					console.log(res);
 					if($('#type').val() == 'text/xml'){
 						const xmlDoc = $.parseXML(res.responseText);
 						$('#output-status').html($(xmlDoc).find('id'));

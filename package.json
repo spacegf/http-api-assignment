@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spacegf/IGME.430.Streaming-Media.git"
+    "url": "git+https://github.com/spacegf/http-api-assignment.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/spacegf/IGME.430.Streaming-Media/issues"
+    "url": "https://github.com/spacegf/http-api-assignment/issues"
   },
-  "homepage": "https://github.com/spacegf/IGME.430.Streaming-Media#readme",
+  "homepage": "https://github.com/spacegf/http-api-assignment#readme",
   "devDependencies": {
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
